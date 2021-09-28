@@ -1,19 +1,42 @@
 import { StatusBar } from 'expo-status-bar';
-import React ,{Fragment}from 'react';
+import React ,{Fragment,useState}from 'react';
 import { StyleSheet,  } from 'react-native';
-import { mapping, light as lightTheme } from '@eva-design/eva'
+import * as eva from '@eva-design/eva';
 import { ApplicationProvider, IconRegistry } from 'react-native-ui-kitten'
 import TabNavigator from './src/Navigator/TabNavigator'
 import { EvaIconsPack } from '@ui-kitten/eva-icons'
-
+import AppLoading from 'expo-app-loading';
+import useFonts from './hooks/useFonts';
+import { default as mapping } from './mapping.json';
+import Firebase, { FirebaseProvider } from './src/utils'
 
 export default function App() {
+  const [IsReady, SetIsReady] = useState(false);
+
+  const LoadFontsAndRestoreToken = async () => {
+    await useFonts();
+  };
+
+  if (!IsReady) {
+    return (
+      <AppLoading
+        startAsync={LoadFontsAndRestoreToken}
+        onFinish={() => SetIsReady(true)}
+        onError={() => {console.log('gweew')}}
+      />
+    );
+  }
+
+  console.disableYellowBox = true;
   return (
     <Fragment>
     <IconRegistry icons={EvaIconsPack} />
-    <ApplicationProvider mapping={mapping} theme={lightTheme}>
+    <ApplicationProvider 
+    {...eva}
+    theme={{ ...eva.dark, ... eva.light }}
+    customMapping={mapping}>
     <TabNavigator />
-    </ApplicationProvider>
+  </ApplicationProvider>
     </Fragment>
   );
 }

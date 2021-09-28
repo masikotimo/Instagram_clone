@@ -8,11 +8,12 @@ import AddPost from '../screens/AddPost'
 import Activity from '../screens/Activity'
 import Profile from '../screens/Profile'
 import { Icon } from 'react-native-ui-kitten'
+import { FeedNavigator } from './StackNavigator'
 
 const TabNavigator = createBottomTabNavigator(
     {
       Feed: {
-        screen: Feed,
+        screen: FeedNavigator,
         navigationOptions: {
           tabBarIcon: ({ focused }) => (
             <Icon
@@ -80,8 +81,10 @@ const TabNavigator = createBottomTabNavigator(
     {
       tabBarOptions: {
         showLabel: false
-      }
-    }
+      },
+      initialRouteName:'AddPost'
+    },
+    
   )
   
   export default createAppContainer(TabNavigator)
