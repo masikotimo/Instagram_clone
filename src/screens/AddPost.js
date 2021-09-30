@@ -41,8 +41,7 @@ class AddPost extends Component {
         title: this.state.title,
         description: this.state.description
       }
-      alert(JSON.stringify(this.props.firebase))
-      Firebase.uploadPost(post)
+      this.props.firebase.uploadPost(post)
 
       this.setState({
         image: null,

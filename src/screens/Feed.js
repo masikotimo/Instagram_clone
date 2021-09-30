@@ -15,9 +15,9 @@ import Firebase from '../utils/Firebase'
 
   fetchPosts = async () => {
     try {
-      // const posts = await this.props.firebase.getPosts()
-      const posts = await Firebase.getPosts()
-      // console.log(posts)
+      const posts = await this.props.firebase.getPosts()
+      // const posts = await Firebase.getPosts()
+      console.log(posts)
       this.setState({ DATA: posts, isRefreshing: false })
     } catch (e) {
       console.error(e)

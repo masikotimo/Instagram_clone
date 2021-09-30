@@ -35,7 +35,9 @@ export default function App() {
     {...eva}
     theme={{ ...eva.dark, ... eva.light }}
     customMapping={mapping}>
-    <TabNavigator />
+    <FirebaseProvider value={Firebase}>
+        <TabNavigator />
+      </FirebaseProvider>
   </ApplicationProvider>
     </Fragment>
   );
