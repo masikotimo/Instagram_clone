@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
-import { Image, View } from 'react-native'
+import { Image, View,ScrollView } from 'react-native'
 import { Text, Button, Input } from 'react-native-ui-kitten'
 import * as ImagePicker from 'expo-image-picker';
 import { withFirebaseHOC } from '../utils'
+import Firebase from '../utils/Firebase'
 import {DATA} from '../utils/data'
 
 class AddPost extends Component {
@@ -40,7 +41,8 @@ class AddPost extends Component {
         title: this.state.title,
         description: this.state.description
       }
-      this.props.firebase.uploadPost(post)
+      alert(JSON.stringify(this.props.firebase))
+      Firebase.uploadPost(post)
 
       this.setState({
         image: null,
@@ -71,7 +73,8 @@ class AddPost extends Component {
 
   render() {
     return (
-      <View style={{ flex: 1, marginTop: 60 }}>
+      <ScrollView>
+<View style={{ flex: 1, marginTop: 60 }}>
         <View>
           {this.state.image ? (
             <Image
@@ -109,6 +112,8 @@ class AddPost extends Component {
           </Button>
         </View>
       </View>
+      </ScrollView>
+      
     )
   }
 }
